@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>KIL-Manipulation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        div.divtitle {
+            padding-top: 25px;
+        }
+        div.divtrial {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .category-title {
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .video-item {
+            width: 320px;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+    <a href="index.html" class="title">Keypoints as an Object-Centric Interface for Imitation Learning: Design Choices, Failure Modes, and Real-World Results</a>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<section id="main" class="wrapper style3 spotlight">
+    <div class="inner">
+        <div class="divtitle">
+            <article class="col-4 col-12-xsmall work-item">
+                <h2>S<sup>2</sup>-Diffusion - Bowl-to-Bowl Scooping Experiments</h2>
+            </article>
+        </div>
+
+        <div id="video-sections">
+            <!-- Videos inserted by JavaScript -->
+        </div>
+
+    </div>
+</section>
+
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="wrapper alt">
+    <div class="inner">
+        <ul class="menu">
+            <li>&copy; All rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Our Smart Video Loop Script -->
+<script>
+    const categories = [
+        {
+            title: "S²-Diffusion - Rice Choco",
+            prefix: "semantic_rice_choco_t",
+            count: 10
+        },
+        {
+            title: "S²-Diffusion - Rice Hearts",
+            prefix: "semantic_rice_hearts_t",
+            count: 10
+        },
+        {
+            title: "S²-Diffusion - Rice Mixed Ablation depth only",
+            prefix: "semantic_rice_mixed_ablation_do_t",
+            count: 10
+        },
+        {
+            title: "S²-Diffusion - Rice Mixed Ablation mask only",
+            prefix: "semantic_rice_mixed_ablation_mo_t",
+            count: 10
+        },
+        {
+            title: "Baseline - Rice Choco",
+            prefix: "trans_rice_choco_t",
+            count: 10
+        },
+        {
+            title: "Baseline - Rice Hearts",
+            prefix: "trans_rice_hearts_t",
+            count: 10
+        },
+        {
+            title: "Baseline - Rice Mixed",
+            prefix: "trans_rice_mixed_t",
+            count: 10
+        }
+    ];
+
+    const videoSections = document.getElementById('video-sections');
+
+    categories.forEach(category => {
+        // Add category title
+        videoSections.insertAdjacentHTML('beforeend', `
+            <h3 class="category-title">${category.title}</h3>
+            <div class="video-grid" id="${category.prefix}"></div>
+        `);
+
+        const container = document.getElementById(category.prefix);
+
+        for (let i = 1; i <= category.count; i++) {
+            let trailNumber = i.toString().padStart(2, '0');
+            container.insertAdjacentHTML('beforeend', `
+                <div class="video-item">
+                    <article class="work-item">
+                        <h4>trial ${trailNumber}</h4>
+                        <video width="320" height="240" controls>
+                            <source src="videos/${category.prefix}${trailNumber}.mkv" type="video/mp4">
+                        </video>
+                    </article>
+                </div>
+            `);
+        }
+    });
+</script>
+
+</body>
+</html>
