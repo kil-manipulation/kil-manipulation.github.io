@@ -1,0 +1,77 @@
+/*
+ * Color palette (airo, simplified)
+ *   #434A52  gray  → main text, h3–h6, sidebar links
+ *   #6595BF  blue  → h1/h2, links, sidebar active/underline
+ *   #B75659  red   → link hover, sidebar hover
+ */
+
+/* ── White background everywhere ── */
+body {
+	background: #ffffff !important;
+	color: #434A52 !important;
+}
+body, input, select, textarea {
+	color: #434A52 !important;
+}
+.wrapper, .wrapper.style1, .wrapper.style1-alt,
+.wrapper.style2, .wrapper.style2-alt,
+.wrapper.style3, .wrapper.style3-alt,
+.wrapper.style4, .wrapper.style7, .wrapper.alt {
+	background-color: #ffffff !important;
+	color: #434A52 !important;
+}
+#footer, footer {
+	background-color: #f7f7f7 !important;
+	color: #888 !important;
+}
+
+/* ── Headings ── */
+h1, h2 {
+	color: #6595BF !important;
+}
+#intro h2, #intro h3 {
+	text-align: center;
+}
+h3, h4, h5, h6 {
+	color: #434A52 !important;
+}
+
+/* ── Body text & captions ── */
+p, li, figcaption {
+	color: #434A52 !important;
+}
+
+/* ── Links ── */
+a {
+	color: #6595BF !important;
+}
+a:hover {
+	color: #B75659 !important;
+}
+
+/* ── Clean sidebar ── */
+#sidebar {
+	background: #ffffff !important;
+	border-right: 1px solid #e8e8e8;
+	box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+}
+#sidebar nav a {
+	color: #434A52 !important;
+	font-size: 0.75em;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	padding: 0.9em 0;
+}
+#sidebar nav a:before {
+	background: #e8e8e8 !important;
+}
+#sidebar nav a:after {
+	background: #6595BF !important;
+}
+#sidebar nav a:hover {
+	color: #B75659 !important;
+}
+#sidebar nav a.active {
+	color: #6595BF !important;
+}
