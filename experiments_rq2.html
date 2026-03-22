@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>RQ2: Keypoint Extraction Methods — KIL-Manipulation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        .video-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
+        .video-item { width: 320px; }
+        .video-item h4 { margin: 0 0 4px 0; font-size: 0.85em; }
+        .task-block { margin-top: 40px; border-top: 2px solid #eef2f7; padding-top: 20px; }
+        .method-block { margin-top: 24px; }
+        .condition-label { font-size: 0.8em; color: #888; margin: 2px 0 6px 0; }
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+    <a href="index.html" class="title">KIL-Manipulation</a>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#rq2">↑ RQ2</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+<section id="main" class="wrapper style3">
+    <div class="inner">
+        <h2>RQ2: How do the three keypoint extraction methods compare?</h2>
+        <p>One representative rollout per condition (in-distribution, novel objects, scene variations) for each KIL extraction method and task.
+           <strong>Methods:</strong> KIL (IM = Image Matching), KIL (IN = Instance Matching), KIL (T = Tracking).</p>
+
+        <div id="video-sections"></div>
+    </div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="wrapper alt">
+    <div class="inner">
+        <ul class="menu">
+            <li>&copy; All rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+    // File naming convention: videos/{prefix}{condition}.mp4
+    // TODO: update prefixes to match your actual video filenames.
+    const tasks = [
+        { label: "Place Shoe",  slug: "place_shoe"  },
+        { label: "Place Mug",   slug: "place_mug"   },
+        { label: "Pour Cup",    slug: "pour_cup"    },
+        { label: "Pick Pen",    slug: "pick_pen"    },
+        { label: "Place Mouse", slug: "place_mouse" }
+    ];
+    const methods = [
+        { label: "KIL (IM — Image Matching)",    slug: "kil_im" },
+        { label: "KIL (IN — Instance Matching)", slug: "kil_in" },
+        { label: "KIL (T — Tracking)",           slug: "kil_t"  }
+    ];
+    const conditions = [
+        { label: "In-distribution", slug: "in"  },
+        { label: "Novel objects",   slug: "obj" },
+        { label: "Scene variations",slug: "s"   }
+    ];
+
+    const container = document.getElementById('video-sections');
+
+    tasks.forEach(task => {
+        const taskDiv = document.createElement('div');
+        taskDiv.className = 'task-block';
+        taskDiv.innerHTML = `<h3>${task.label}</h3>`;
+
+        methods.forEach(method => {
+            const methodDiv = document.createElement('div');
+            methodDiv.className = 'method-block';
+            methodDiv.innerHTML = `<h4>${method.label}</h4><div class="video-grid" id="${task.slug}_${method.slug}"></div>`;
+            taskDiv.appendChild(methodDiv);
+
+            const grid = methodDiv.querySelector('.video-grid');
+            conditions.forEach(cond => {
+                const prefix = `rq2_${task.slug}_${method.slug}_${cond.slug}`;
+                grid.insertAdjacentHTML('beforeend', `
+                    <div class="video-item">
+                        <p class="condition-label">${cond.label}</p>
+                        <video width="320" height="240" controls>
+                            <source src="videos/${prefix}.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                `);
+            });
+        });
+
+        container.appendChild(taskDiv);
+    });
+</script>
+
+</body>
+</html>

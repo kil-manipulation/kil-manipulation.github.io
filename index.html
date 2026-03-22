@@ -22,10 +22,10 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">KIL-Manipulation</li>
+							<li><a href="#intro">KIL-Manipulation</a></li>
+							<li><a href="#tasks">Tasks &amp; Evaluation</a></li>
 							<li><a href="#eval">Experiments</a></li>
-							<!--li><a href="#cite">How to Cite</a></li-->
-							<li><a href="#contact">Contact</a></li>
+							<!--li><a href="#contact">Contact</a></li-->
 						</ul>
 					</nav>
 				</div>
@@ -37,25 +37,23 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h2>							<h2>Keypoints as an Object-Centric Interface for Imitation Learning: Design Choices, Failure Modes, and Real-World Results</h2>
- </h2>
+							<h2>Keypoints as an Object-Centric Interface for Imitation Learning: Design Choices, Failure Modes, and Real-World Results</h2>
 							<h3>Anonymous Authors</h3>
 							<p>
 								RGB-based imitation learning requires many demonstrations to generalize to unseen objects or scenes, motivating research into intermediate representations to improve generalization for robotic manipulation.
 								Visual foundation models enable one-shot extraction of keypoints to provide such representation. However, it remains unclear how to integrate them into imitation learning optimally and when they outperform alternative representations.
 								We combine approaches from previous works on keypoint imitation learning (KIL) and investigate several design choices to provide practical guidelines. Using over 2000 real-world rollouts, we also assess the generalization capabilities of KIL to unseen objects and scene variations. KIL achieves a 75% overall success rate across five tasks, significantly outperforming the RGB baseline (47%) and performing on par with S<sup>2</sup>-Diffusion (73%). Finally, we explore the limitations of the foundation models used for keypoint extraction and extend KIL to tasks with multiple object instances.
-								Our results confirm KIL as a data-efficient approach for robot learning, though it does not outperform alternative representations and inherits limitations of the foundation models used for keypoint extraction. 							<p>
+								Our results confirm KIL as a data-efficient approach for robot learning, though it does not outperform alternative representations and inherits limitations of the foundation models used for keypoint extraction.
 							</p>
 							<div class="row" style="justify-content: center;">
 								<div class="video-container">
-							        <video width="960" height="540" controls>
-							            <source src="videos/iros_1minute.mp4" type="video/mp4">
-							            Your browser does not support the video tag.
-							        </video>
-
-							    </div>
-
+								    <video width="960" height="540" controls>
+								        <source src="videos/iros_1minute.mp4" type="video/mp4">
+								        Your browser does not support the video tag.
+								    </video>
+								</div>
 							</div>
+							<div style="margin-top: 2.5em;"></div>
 							<div class="row" style="justify-content: center; gap: 20px; margin-top: 20px;">
 								<div style="width: 48%; display: flex; flex-direction: column; gap: 20px;">
 									<figure style="margin: 0;">
@@ -75,102 +73,341 @@
 							<p> </p>
 							<a href="files/TODO.pdf" target="_blank" download="files/TODO.pdf">Download Preprint</a>
 							<p> </p>
-							<!--ul >
-							  <li><sup>∗</sup> These authors contributed equally.</li>
-							  <li><sup>1</sup> KTH Royal Institute of Technology, Stockholm, Sweden</li>
-							  <li><sup>2</sup> INCAR Robotics AB, Stockholm, Sweden</li>
-							</ul-->
-
-
-
-
 						</div>
 					</section>
 
 
-					
+				<!-- Tasks & Evaluation -->
+				<section id="tasks" class="wrapper style2 fade-up">
+					<div class="inner">
+						<h2>Tasks &amp; Evaluation</h2>
+						<p>We evaluate KIL across five real-world manipulation tasks on two robot platforms. For each task, 50 demonstrations are collected with two training objects. Object positions are varied across the workspace; orientations are limited to ±30° around a canonical orientation. Each method is evaluated with 30 rollouts across three conditions: in-distribution (in), unseen objects (obj), and scene variations (s).</p>
 
-					<!-- Eval -->
-					<section id="eval" class="wrapper style3 fade-up">
-						<div class="inner">
-							<h2>Experiments </h2>
-
-							<p> </p>
-							<p> TODO</p>
-
-
-							<div class="row">
-								<div class="video-container">
-							        <p><b>Red whiteboard wiping task</b> </p>
-							        <video width="640" height="360" controls preload="auto">
-							            <source src="videos/wiping_semantic_red_t03.mkv" type="video/mp4">
-							            Your browser does not support the video tag.
-							        </video>
-							    </div>
-							    <div class="video-container">
-							        <p><b>Green whiteboard wiping task</b> </p>
-							        <video width="640" height="360" controls preload="auto">
-							            <source src="videos/wiping_semantic_green_t03.mkv" type="video/mp4">
-							            Your browser does not support the video tag.
-							        </video>
-							    </div>
-							    <div class="video-container">
-							        <p><b>Black whiteboard wiping task</b> </p>
-							        <video width="640" height="360" controls preload="auto">
-							            <source src="videos/wiping_semantic_black_t03.mkv" type="video/mp4">
-							            Your browser does not support the video tag.
-							        </video>
-							    </div>
-							  
+						<div class="task-slider">
+							<div class="task-tabs">
+								<button class="task-tab active" data-index="0">Place Shoe</button>
+								<button class="task-tab" data-index="1">Place Mug</button>
+								<button class="task-tab" data-index="2">Pour Bottle</button>
+								<button class="task-tab" data-index="3">Pick Pen</button>
+								<button class="task-tab" data-index="4">Place Mouse</button>
 							</div>
 
-							<p> All experiments: </p>
+							<div class="task-track-wrapper">
+								<div class="task-track">
 
-							
-							<p> <a class="button mybutton"  href="experiments_1.html" target="_blank" > Whiteboard wiping</a> </p>
+									<!-- Place Shoe -->
+									<div class="task-panel">
+										<p>Pick a randomly placed shoe by the heel and put it on a tray at a fixed location. Success requires correct placement without moving the tray and with the shoe oriented within 90° of the tray’s y-axis.</p>
+										<div class="row" style="gap: 1.5em; margin-bottom: 0.5em;">
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/demo_distribution/1shoe-v4-distribution.png" style="width: 100%;" />
+												<figcaption>Demonstration distribution — overlay of initial frames showing workspace coverage during data collection.</figcaption>
+											</figure>
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/kp_configs/1shoe-tray-v2-kp.png" style="width: 100%;" />
+												<figcaption>Keypoint configuration — reference image with annotated keypoints used for the policy representation.</figcaption>
+											</figure>
+										</div>
+										<figure style="margin: 0;">
+											<img src="images/eval_configs/1shoe-v4-grid.jpg" style="width: 100%;" />
+											<figcaption>Initial states used for evaluation.</figcaption>
+										</figure>
+									</div>
 
-							
+									<!-- Place Mug -->
+									<div class="task-panel">
+										<p>Pick a randomly placed, upright mug by the rim and place it on a tray at a fixed position.</p>
+										<div class="row" style="gap: 1.5em; margin-bottom: 0.5em;">
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/demo_distribution/1mug-v3-distribution.png" style="width: 100%;" />
+												<figcaption>Demonstration distribution.</figcaption>
+											</figure>
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/kp_configs/1mug-tray-v5-kp.png" style="width: 100%;" />
+												<figcaption>Keypoint configuration.</figcaption>
+											</figure>
+										</div>
+										<figure style="margin: 0;">
+											<img src="images/eval_configs/1mug-v3-grid.jpg" style="width: 100%;" />
+											<figcaption>Initial states used for evaluation.</figcaption>
+										</figure>
+									</div>
 
-							
+									<!-- Pour Bottle -->
+									<div class="task-panel">
+										<p>Pick a plastic bottle, move it over a cup at a randomized position, and tilt it as if pouring. Both objects are rotationally symmetric so orientation does not matter. Success requires the bottle to be tilted beyond horizontal and held directly above the cup.</p>
+										<div class="row" style="gap: 1.5em; margin-bottom: 0.5em;">
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/demo_distribution/pour-bottle-v1-distribution.png" style="width: 100%;" />
+												<figcaption>Demonstration distribution.</figcaption>
+											</figure>
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/kp_configs/pour-bottle-v1-kp.png" style="width: 100%;" />
+												<figcaption>Keypoint configuration.</figcaption>
+											</figure>
+										</div>
+										<figure style="margin: 0;">
+											<img src="images/eval_configs/pour-bottle-v1-grid.jpg" style="width: 100%;" />
+											<figcaption>Initial states used for evaluation.</figcaption>
+										</figure>
+									</div>
 
+									<!-- Pick Pen -->
+									<div class="task-panel">
+										<p>Pick up a randomly placed pen and drop it into a cardboard box at a fixed location. Success requires the pen to fall inside or remain on top of the box without being dropped or moving the box.</p>
+										<div class="row" style="gap: 1.5em; margin-bottom: 0.5em;">
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/demo_distribution/1pen-distribution.png" style="width: 100%;" />
+												<figcaption>Demonstration distribution.</figcaption>
+											</figure>
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/kp_configs/1pen-both-7kp.png" style="width: 100%;" />
+												<figcaption>Keypoint configuration.</figcaption>
+											</figure>
+										</div>
+										<figure style="margin: 0;">
+											<img src="images/eval_configs/1pen-grid.jpg" style="width: 100%;" />
+											<figcaption>Initial states used for evaluation.</figcaption>
+										</figure>
+									</div>
+
+									<!-- Place Mouse -->
+									<div class="task-panel">
+										<p>Grasp a randomly positioned mouse from the sides and place it on a mouse pad at a fixed location. Success requires the mouse to be placed on the pad facing the scene camera with the scroll wheel visible, without moving the pad or dropping the mouse.</p>
+										<div class="row" style="gap: 1.5em; margin-bottom: 0.5em;">
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/demo_distribution/1mouse-distribution.png" style="width: 100%;" />
+												<figcaption>Demonstration distribution.</figcaption>
+											</figure>
+											<figure style="flex: 1; margin: 0;">
+												<img src="images/kp_configs/1mouse-both-7kp.png" style="width: 100%;" />
+												<figcaption>Keypoint configuration.</figcaption>
+											</figure>
+										</div>
+										<figure style="margin: 0;">
+											<img src="images/eval_configs/1mouse-grid.jpg" style="width: 100%;" />
+											<figcaption>Initial states used for evaluation.</figcaption>
+										</figure>
+									</div>
+
+								</div><!-- /.task-track -->
+							</div><!-- /.task-track-wrapper -->
+
+							<div class="task-nav">
+								<button class="task-prev" aria-label="Previous task">&#8592;</button>
+								<button class="task-next" aria-label="Next task">&#8594;</button>
+							</div>
+						</div><!-- /.task-slider -->
+					</div>
+				</section>
+
+				<!-- Eval -->
+					<section id="eval" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Experiments</h2>
+							<p>We structure our evaluation around five research questions (RQ1–RQ5) using over 2000 real-world rollouts across five manipulation tasks on two robots. Each method is tested using 30 rollouts, split into 10 trials per condition: in-distribution (in), unseen objects (obj), and scene variations (s).</p>
+
+							<!-- RQ1 -->
+							<h3 id="rq1" class="rq-heading">RQ1: Does KIL improve generalization over alternative representations? <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We compare KIL against an RGB diffusion policy baseline and S²-Diffusion across five tasks and three evaluation conditions. IM = Image Matching, IN = Instance Matching, T = Tracking. Each cell shows successes out of 10 trials. KIL achieves 75% overall success—28 percentage points above the RGB baseline (47%)—while matching S²-Diffusion (73%). RGB collapses to just 10% on scene variations, while all KIL variants maintain 64–74% generalization. Tracking-based KIL shows the most consistent performance across in-distribution, object, and scene conditions.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th>Method</th>
+											<th>in (%)</th>
+											<th>obj (%)</th>
+											<th>s (%)</th>
+											<th>Avg. (%)</th>
+											<th>95% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>RGB</td><td>74%</td><td>56%</td><td>10%</td><td>47%</td><td>[38, 55]</td></tr>
+										<tr><td>S²-Diffusion</td><td>80%</td><td>74%</td><td>66%</td><td>73%</td><td>[66, 80]</td></tr>
+										<tr><td>KIL (IM)</td><td>88%</td><td>68%</td><td>70%</td><td>75%</td><td>[68, 82]</td></tr>
+										<tr><td>KIL (IN)</td><td>76%</td><td>70%</td><td>64%</td><td>70%</td><td>[62, 77]</td></tr>
+										<tr><td>KIL (T)</td><td>76%</td><td>74%</td><td>74%</td><td>75%</td><td>[67, 81]</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rq1.html" target="_blank">All RQ1 rollout videos</a></p>
+
+							<!-- RQ2 -->
+							</div>
+							<h3 id="rq2" class="rq-heading">RQ2: How do the three keypoint extraction methods compare? <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We compare image matching (IM), instance matching (IN), and tracking (T) for KIL across all five tasks and three conditions. All three methods achieve similar success rates, so adding explicit tracking or first detecting instances does not help on the considered tasks.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th>Method</th>
+											<th>in (%)</th>
+											<th>obj (%)</th>
+											<th>s (%)</th>
+											<th>Avg. (%)</th>
+											<th>95% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>KIL (IM)</td><td>88%</td><td>68%</td><td>70%</td><td>75%</td><td>[68, 82]</td></tr>
+										<tr><td>KIL (IN)</td><td>76%</td><td>70%</td><td>64%</td><td>70%</td><td>[62, 77]</td></tr>
+										<tr><td>KIL (T)</td><td>76%</td><td>74%</td><td>74%</td><td>75%</td><td>[67, 81]</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rq2.html" target="_blank">All RQ2 rollout videos</a></p>
+
+							<!-- RQ3 -->
+							</div>
+							<h3 id="rq3" class="rq-heading">RQ3: Which visual foundation models are best suited for keypoint extraction? <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We evaluate three feature models—RADIOv2.5-B, DIFT (ensemble sizes 2 and 8), and DINOv3-B—across all extraction methods, tested on two tasks: Place Shoe and Place Mug. No single foundation model dominates across all extraction methods. RADIOv2.5-B is best for image matching (85%), while DIFT₂ works best for instance matching (80%). Feature model selection should be co-optimized with the chosen extraction method rather than treated as a universal hyperparameter.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th>Extraction Method</th>
+											<th>Feature Model</th>
+											<th>Place Shoe (/30)</th>
+											<th>Place Mug (/30)</th>
+											<th>Avg. (%)</th>
+											<th>95% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td rowspan="3">Image</td>
+											<td>RADIOv2.5-B</td>
+											<td>25</td><td>26</td><td>85%</td><td>[73, 93]</td>
+										</tr>
+										<tr>
+											<td>DIFT₂</td>
+											<td>13</td><td>24</td><td>62%</td><td>[48, 74]</td>
+										</tr>
+										<tr>
+											<td>DINOv3-B</td>
+											<td>20</td><td>24</td><td>73%</td><td>[60, 84]</td>
+										</tr>
+										<tr>
+											<td rowspan="2">Instance</td>
+											<td>RADIOv2.5-B</td>
+											<td>19</td><td>27</td><td>77%</td><td>[64, 87]</td>
+										</tr>
+										<tr>
+											<td>DIFT₂</td>
+											<td>21</td><td>27</td><td>80%</td><td>[68, 89]</td>
+										</tr>
+										<tr>
+											<td rowspan="3">Tracking</td>
+											<td>RADIOv2.5-B</td>
+											<td>20</td><td>24</td><td>73%</td><td>[60, 84]</td>
+										</tr>
+										<tr>
+											<td>DIFT₂</td>
+											<td>23</td><td>26</td><td>82%</td><td>[70, 90]</td>
+										</tr>
+										<tr>
+											<td>DIFT₈</td>
+											<td>21</td><td>27</td><td>80%</td><td>[68, 89]</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rq3.html" target="_blank">All RQ3 rollout videos</a></p>
+
+							<!-- RQ4 -->
+							</div>
+							<h3 id="rq4" class="rq-heading">RQ4: How should keypoints be encoded in the policy? <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We compare four encoder configurations on Place Shoe and Place Mug, testing whether architectural complexity in the keypoint encoder improves policy performance. Our transformer encoder matches the no-encoder baseline (85%), providing no benefit from architectural complexity. Data augmentation is essential: adding similarity scores without augmentation causes near-total failure (7%). Practitioners can safely use simple concatenation without any loss of performance.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th>Encoder</th>
+											<th>Avg. (%)</th>
+											<th>95% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>None (concatenation)</td><td>85%</td><td>[73, 93]</td></tr>
+										<tr><td>Ours</td><td>85%</td><td>[73, 93]</td></tr>
+										<tr><td>Ours + similarity scores − augmentation</td><td>7%</td><td>[2, 16]</td></tr>
+										<tr><td>Ours + similarity scores</td><td>65%</td><td>[52, 77]</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rq4.html" target="_blank">All RQ4 rollout videos</a></p>
+
+							<!-- RQ5 -->
+							</div>
+							<h3 id="rq5" class="rq-heading">RQ5: Can KIL handle tasks with multiple object instances? <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We extend KIL to tasks involving two instances of the same object category: placing two shoes and picking two pens, comparing against RGB and S²-Diffusion baselines. KIL (IM) achieves the best multi-instance performance (63%), outperforming RGB (48%) and S²-Diffusion (58%). Object-centric keypoints naturally disambiguate same-category instances, though overall performance is lower than single-object tasks, reflecting the added complexity of coordinating actions for two objects.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th>Method</th>
+											<th>Place 2 Shoes (/30)</th>
+											<th>Pick 2 Pens (/30)</th>
+											<th>Avg. (%)</th>
+											<th>95% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>RGB</td><td>13</td><td>15.5</td><td>48%</td><td>[37, 58]</td></tr>
+										<tr><td>S²-Diffusion</td><td>14.5</td><td>20.5</td><td>58%</td><td>[47, 69]</td></tr>
+										<tr><td>KIL (IM)</td><td>21.5</td><td>16.5</td><td>63%</td><td>[54, 73]</td></tr>
+										<tr><td>KIL (IN)</td><td>21.5</td><td>15</td><td>61%</td><td>[50, 72]</td></tr>
+										<tr><td>KIL (T)</td><td>15.5</td><td>15.5</td><td>52%</td><td>[40, 63]</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rq5.html" target="_blank">All RQ5 rollout videos</a></p>
+
+							<!-- Rotation robustness -->
+							</div>
+							<h3 id="rotation" class="rq-heading">Robustness Against Rotations <span class="rq-toggle">&#9660;</span></h3>
+							<div class="rq-content">
+							<p>We test sensitivity to initial object orientation by comparing performance under ±30° vs ±180° rotation ranges on Place Mouse and Pick Pen. KIL is not rotation-robust: image matching drops 55 percentage points under large rotations (77% → 35%), compared to just 10 pp for RGB. This is a fundamental limitation inherited from the visual foundation models used for keypoint extraction, which fail to establish reliable correspondences when objects are rotated beyond approximately 30°.</p>
+							<div class="table-scroll">
+								<table class="results-table">
+									<thead>
+										<tr>
+											<th rowspan="2">Method</th>
+											<th colspan="2">±180° orientations</th>
+											<th>±30° orientations</th>
+											<th rowspan="2">Δ (30°→180°)</th>
+										</tr>
+										<tr>
+											<th>Avg. (no scene var.)</th>
+											<th>Avg.</th>
+											<th>Avg.</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>RGB</td><td>70%</td><td>47%</td><td>52%</td><td>−10%</td></tr>
+										<tr><td>S²-Diffusion</td><td>80%</td><td>70%</td><td>77%</td><td>−9%</td></tr>
+										<tr><td>KIL (IM)</td><td>45%</td><td>35%</td><td>77%</td><td>−55%</td></tr>
+										<tr><td>KIL (T)</td><td>48%</td><td>48%</td><td>67%</td><td>−28%</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p><a class="button mybutton" href="experiments_rotation.html" target="_blank">All rotation experiment videos</a></p>
+
+							</div>
 						</div>
 					</section>
 
-				
-						<!-- Cite -->
-					<!--section id="cite" class="wrapper style2 fade-up">
 
-						<div class="inner">
-							<h2>Use the following to cite us:</h2>
-							p class="p-code"><code>@inproceedings{welle2024quest2ros, <br>
-						  title={Quest2ROS: An App to Facilitate Teleoperating Robots},<br>
-						  author={Welle, Michael C and Ingelhag, Nils and Lippi, Martina and Wozniak, Maciej and Gasparri, Andrea and Kragic, Danica},<br>
-						  booktitle={7th International Workshop on Virtual, Augmented, and Mixed-Reality for Human-Robot Interactions},<br>
-						  year={2024}
-							}
-</code></p>
-							<p> </p>
-
-
-						</div>
-
-
-					</section-->
-
-
-					<!-- five -->
-					<!--section id="contact" class="wrapper style1 fade-up">
-						<div class="inner">
-							<h2>Contact</h2>
-							<ul>
-										<li>Michael C. Welle; mwelle(at)kth.se; KTH Royal Institute of Technology, Sweden</li>
-
-									</ul>
-
-						</div>
-					</section-->
-
-
+				<!-- Cite (commented out) -->
+				<!--section id="cite" class="wrapper style2 fade-up">
+				...
+				</section-->
 
 
 			</div>
@@ -192,6 +429,40 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+		<script>
+			// Task slider
+			(function() {
+				var track = document.querySelector('.task-track');
+				var tabs = document.querySelectorAll('.task-tab');
+				var prev = document.querySelector('.task-prev');
+				var next = document.querySelector('.task-next');
+				var current = 0;
+				var total = tabs.length;
+
+				function goTo(index) {
+					current = Math.max(0, Math.min(total - 1, index));
+					track.style.transform = 'translateX(-' + (current * 100) + '%)';
+					tabs.forEach(function(t, i) { t.classList.toggle('active', i === current); });
+					prev.disabled = current === 0;
+					next.disabled = current === total - 1;
+				}
+
+				tabs.forEach(function(tab) {
+					tab.addEventListener('click', function() { goTo(parseInt(tab.dataset.index)); });
+				});
+				prev.addEventListener('click', function() { goTo(current - 1); });
+				next.addEventListener('click', function() { goTo(current + 1); });
+				goTo(0);
+			})();
+
+			document.querySelectorAll('.rq-heading').forEach(function(heading) {
+				heading.addEventListener('click', function() {
+					var content = heading.nextElementSibling;
+					heading.classList.toggle('open');
+					content.classList.toggle('open');
+				});
+			});
+		</script>
 
 	</body>
 </html>

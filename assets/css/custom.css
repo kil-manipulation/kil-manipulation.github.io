@@ -75,3 +75,173 @@ a:hover {
 #sidebar nav a.active {
 	color: #6595BF !important;
 }
+
+/* ── Results tables ── */
+.table-scroll {
+	overflow-x: auto;
+	margin: 1.2em 0 0.4em 0;
+}
+.results-table {
+	width: auto;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 0.82em;
+}
+.results-table th,
+.results-table td {
+	border: 1px solid #dde3ea;
+	padding: 5px 14px;
+	text-align: center;
+	color: #434A52 !important;
+	white-space: nowrap;
+}
+.results-table th {
+	background: #eef2f7;
+	font-weight: 700;
+	color: #434A52 !important;
+}
+.results-table td:first-child {
+	text-align: left;
+	font-weight: 600;
+}
+.results-table tbody tr:hover td {
+	background: #f7f9fb;
+}
+.results-table td strong {
+	font-weight: 700;
+	color: #1a2a3a !important;
+}
+.table-caption {
+	font-size: 0.88em;
+	color: #434A52 !important;
+	text-align: left !important;
+	margin-top: 0.4em;
+	margin-bottom: 1.4em;
+	line-height: 1.5;
+	max-width: 860px;
+}
+
+/* Also prevent figcaptions from justifying */
+figcaption {
+	text-align: left !important;
+}
+
+/* ── Experiment link buttons ── */
+a.button.mybutton {
+	color: #6595BF !important;
+	border-color: #6595BF !important;
+	background-color: transparent !important;
+}
+a.button.mybutton:hover {
+	color: #ffffff !important;
+	background-color: #6595BF !important;
+	border-color: #6595BF !important;
+}
+
+/* ── Task slider ── */
+.task-slider {
+	margin-top: 1.5em;
+}
+.task-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	margin-bottom: 1.4em;
+}
+.task-tab {
+	background: transparent;
+	border: 1.5px solid #d0d8e4;
+	border-radius: 2em;
+	color: #434A52 !important;
+	cursor: pointer;
+	font-size: 0.85em;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 0.45em 1.1em;
+	transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.task-tab:hover {
+	border-color: #6595BF;
+	color: #6595BF !important;
+}
+.task-tab.active {
+	background: #6595BF;
+	border-color: #6595BF;
+	color: #fff !important;
+}
+.task-track-wrapper {
+	overflow: hidden;
+}
+.task-track {
+	display: flex;
+	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.task-panel {
+	flex: 0 0 100%;
+	min-width: 0;
+}
+.task-nav {
+	display: flex;
+	gap: 0.6em;
+	justify-content: flex-end;
+	margin-top: 1.2em;
+}
+.task-prev,
+.task-next {
+	background: transparent;
+	border: 1.5px solid #d0d8e4;
+	border-radius: 50%;
+	color: #6595BF !important;
+	cursor: pointer;
+	font-size: 1.1em;
+	height: 2.4em;
+	line-height: 1;
+	transition: background 0.2s, border-color 0.2s;
+	width: 2.4em;
+}
+.task-prev:hover,
+.task-next:hover {
+	background: #6595BF;
+	border-color: #6595BF;
+	color: #fff !important;
+}
+.task-prev:disabled,
+.task-next:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+/* ── RQ subsection headings & dropdowns ── */
+.rq-heading {
+	margin-top: 2.2em;
+	padding-top: 1.4em;
+	border-top: 2px solid #eef2f7;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	user-select: none;
+}
+.rq-heading:hover {
+	color: #6595BF !important;
+}
+.rq-toggle {
+	font-size: 0.75em;
+	color: #6595BF;
+	transition: transform 0.25s ease;
+	flex-shrink: 0;
+	margin-left: 1em;
+}
+.rq-heading.open .rq-toggle {
+	transform: rotate(180deg);
+}
+.rq-content {
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height 0.35s ease, opacity 0.25s ease;
+	opacity: 0;
+}
+.rq-content.open {
+	max-height: 4000px;
+	opacity: 1;
+}
