@@ -81,7 +81,7 @@
 				<section id="tasks" class="wrapper style2 fade-up">
 					<div class="inner">
 						<h2>Tasks &amp; Evaluation</h2>
-						<p>We evaluate KIL across five real-world manipulation tasks on two robot platforms. For each task, 50 demonstrations are collected with two training objects. Object positions are varied across the workspace; orientations are limited to ±30° around a canonical orientation. Each method is evaluated with 30 rollouts across three conditions: in-distribution (in), unseen objects (obj), and scene variations (s).</p>
+						<p>We evaluate KIL across five real-world manipulation tasks on two robot platforms. For each task, 50 demonstrations are collected with two training objects. Object positions are varied across the workspace; orientations are limited to ±30° around a canonical orientation. Each method is evaluated with 30 rollouts across three conditions: in-distribution, novel objects, and scene variations.</p>
 
 						<div class="task-slider">
 							<div class="task-tabs">
@@ -205,20 +205,20 @@
 					<section id="eval" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>Experiments</h2>
-							<p>We structure our evaluation around five research questions (RQ1–RQ5) using over 2000 real-world rollouts across five manipulation tasks on two robots. Each method is tested using 30 rollouts, split into 10 trials per condition: in-distribution (in), unseen objects (obj), and scene variations (s).</p>
+							<p>We structure our evaluation around five research questions (RQ1–RQ5) using over 2000 real-world rollouts across five manipulation tasks on two robots. Each method is tested using 30 rollouts, split into 10 trials per condition: in-distribution, novel objects, and scene variations. Additionally, we highlight a surprising sensitivity of KIL to object orientations.</p>
 
 							<!-- RQ1 -->
 							<h3 id="rq1" class="rq-heading">RQ1: Does KIL improve generalization over alternative representations? <span class="rq-toggle">&#9660;</span></h3>
 							<div class="rq-content">
-							<p>We compare KIL against an RGB diffusion policy baseline and S²-Diffusion across five tasks and three evaluation conditions. IM = Image Matching, IN = Instance Matching, T = Tracking. Each cell shows successes out of 10 trials. KIL achieves 75% overall success—28 percentage points above the RGB baseline (47%)—while matching S²-Diffusion (73%). RGB collapses to just 10% on scene variations, while all KIL variants maintain 64–74% generalization. Tracking-based KIL shows the most consistent performance across in-distribution, object, and scene conditions.</p>
+							<p>We compare KIL against an RGB diffusion policy baseline and S²-Diffusion across five tasks and three evaluation conditions. KIL achieves 75% overall success, 28 percentage points above the RGB baseline (47%). S²-Diffusion (73%) performs on par with KIL. RGB collapses to just 10% on scene variations, which explains most of the performance gap.</p>
 							<div class="table-scroll">
 								<table class="results-table">
 									<thead>
 										<tr>
 											<th>Method</th>
-											<th>in (%)</th>
-											<th>obj (%)</th>
-											<th>s (%)</th>
+											<th>In-distribution (%)</th>
+											<th>Novel objects (%)</th>
+											<th>Scene variations (%)</th>
 											<th>Avg. (%)</th>
 											<th>95% CI</th>
 										</tr>
@@ -244,9 +244,9 @@
 									<thead>
 										<tr>
 											<th>Method</th>
-											<th>in (%)</th>
-											<th>obj (%)</th>
-											<th>s (%)</th>
+											<th>In-distribution (%)</th>
+											<th>Novel objects (%)</th>
+											<th>Scene variations (%)</th>
 											<th>Avg. (%)</th>
 											<th>95% CI</th>
 										</tr>
@@ -264,7 +264,7 @@
 							</div>
 							<h3 id="rq3" class="rq-heading">RQ3: Which visual foundation models are best suited for keypoint extraction? <span class="rq-toggle">&#9660;</span></h3>
 							<div class="rq-content">
-							<p>We evaluate three feature models—RADIOv2.5-B, DIFT (ensemble sizes 2 and 8), and DINOv3-B—across all extraction methods, tested on two tasks: Place Shoe and Place Mug. No single foundation model dominates across all extraction methods. RADIOv2.5-B is best for image matching (85%), while DIFT₂ works best for instance matching (80%). Feature model selection should be co-optimized with the chosen extraction method rather than treated as a universal hyperparameter.</p>
+							<p>We compare three feature models: RADIOv2.5-B, DIFT (ensemble sizes 2 and 8) and DINOv3-B. We evaluate them across all keypoint extraction methods, and test on two tasks: Place Shoe and Place Mug. The performance of all foundation models is similar, but RADIOv2.5-B performs best for image matching, while DIFT₂ works best for instance matching and tracking.</p>
 							<div class="table-scroll">
 								<table class="results-table">
 									<thead>
@@ -322,7 +322,7 @@
 							</div>
 							<h3 id="rq4" class="rq-heading">RQ4: How should keypoints be encoded in the policy? <span class="rq-toggle">&#9660;</span></h3>
 							<div class="rq-content">
-							<p>We compare four encoder configurations on Place Shoe and Place Mug, testing whether architectural complexity in the keypoint encoder improves policy performance. Our transformer encoder matches the no-encoder baseline (85%), providing no benefit from architectural complexity. Data augmentation is essential: adding similarity scores without augmentation causes near-total failure (7%). Practitioners can safely use simple concatenation without any loss of performance.</p>
+							<p>We compare four options for encoding the keypoints before passing them to the diffusion action head on Place Shoe and Place Mug. Our transformer encoder matches the no-encoder baseline (85%). We also try adding the similarity scores from the keypoint matching, but find this to performancy very poorly when combined with augmentations, pressumably due to overfitting on the similarity scores. We therefore do not recommend using similarity scores to encode the keypoints.</p>
 							<div class="table-scroll">
 								<table class="results-table">
 									<thead>
@@ -335,8 +335,8 @@
 									<tbody>
 										<tr><td>None (concatenation)</td><td>85%</td><td>[73, 93]</td></tr>
 										<tr><td>Ours</td><td>85%</td><td>[73, 93]</td></tr>
-										<tr><td>Ours + similarity scores − augmentation</td><td>7%</td><td>[2, 16]</td></tr>
-										<tr><td>Ours + similarity scores</td><td>65%</td><td>[52, 77]</td></tr>
+										<tr><td>Ours + similarity scores</td><td>7%</td><td>[2, 16]</td></tr>
+										<tr><td>Ours + similarity scores - augmentation</td><td>65%</td><td>[52, 77]</td></tr>
 									</tbody>
 								</table>
 							</div>
@@ -346,7 +346,7 @@
 							</div>
 							<h3 id="rq5" class="rq-heading">RQ5: Can KIL handle tasks with multiple object instances? <span class="rq-toggle">&#9660;</span></h3>
 							<div class="rq-content">
-							<p>We extend KIL to tasks involving two instances of the same object category: placing two shoes and picking two pens, comparing against RGB and S²-Diffusion baselines. KIL (IM) achieves the best multi-instance performance (63%), outperforming RGB (48%) and S²-Diffusion (58%). Object-centric keypoints naturally disambiguate same-category instances, though overall performance is lower than single-object tasks, reflecting the added complexity of coordinating actions for two objects.</p>
+							<p>We extend KIL to tasks involving two instances of the same object category. We refer to the paper for details on the changes made to the model and pipeline. We test on two tasks: placing two shoes and picking two pens, comparing against RGB and S²-Diffusion baselines. KIL performs on par with S²-Diffusion, and outperforms RGB, similar to the single-object tasks in RQ1.</p>
 							<div class="table-scroll">
 								<table class="results-table">
 									<thead>
@@ -373,7 +373,7 @@
 							</div>
 							<h3 id="rotation" class="rq-heading">Robustness Against Rotations <span class="rq-toggle">&#9660;</span></h3>
 							<div class="rq-content">
-							<p>We test sensitivity to initial object orientation by comparing performance under ±30° vs ±180° rotation ranges on Place Mouse and Pick Pen. KIL is not rotation-robust: image matching drops 55 percentage points under large rotations (77% → 35%), compared to just 10 pp for RGB. This is a fundamental limitation inherited from the visual foundation models used for keypoint extraction, which fail to establish reliable correspondences when objects are rotated beyond approximately 30°.</p>
+							<p>We test sensitivity to initial object orientation by comparing performance under ±30° (default used in all other experiments) vs ±180° object rotation ranges on Place Mouse and Pick Pen. KIL is not rotation-robust: image matching drops 55 percentage points under large rotations (77% → 35%), compared to just 10 pp for RGB. This is a fundamental limitation inherited from the visual foundation models used for keypoint extraction, which fail to establish reliable correspondences when objects are significantly rotated.</p>
 							<div class="table-scroll">
 								<table class="results-table">
 									<thead>

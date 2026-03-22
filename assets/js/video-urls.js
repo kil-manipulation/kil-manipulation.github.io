@@ -324,13 +324,13 @@ function driveVideoItem(key, condLabel) {
         <div style="width:320px;height:120px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:0.8em;">No video</div>
       </div>`;
   }
-  const thumb = `https://drive.google.com/thumbnail?id=${id}&sz=w320-h120`;
+  const thumb = `https://drive.google.com/thumbnail?id=${id}&sz=w330-h248`;
   const preview = `https://drive.google.com/file/d/${id}/preview`;
   return `
     <div class="video-item">
       <p class="condition-label">${condLabel}</p>
-      <div class="drive-thumb" data-src="${preview}" style="width:320px;height:120px;cursor:pointer;position:relative;background:#000;">
-        <img src="${thumb}" width="320" height="120" style="display:block;object-fit:cover;" loading="lazy" />
+      <div class="drive-thumb" data-src="${preview}" style="width:330px;aspect-ratio:4/3;cursor:pointer;position:relative;background:#000;">
+        <img src="${thumb}" width="330" style="display:block;width:100%;height:100%;object-fit:cover;" loading="lazy" />
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
           <div style="width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -348,8 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = thumb.dataset.src;
     const iframe = document.createElement('iframe');
     iframe.src = src;
-    iframe.width = 320;
-    iframe.height = 120;
+    iframe.width = 330;
+    iframe.style.aspectRatio = '4/3';
+    iframe.style.height = '';
     iframe.allow = 'autoplay';
     iframe.allowFullscreen = true;
     iframe.style.border = 'none';
