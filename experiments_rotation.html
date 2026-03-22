@@ -53,6 +53,7 @@
     </div>
 </footer>
 
+<script src="assets/js/video-urls.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
@@ -69,14 +70,10 @@
         { label: "Pick Pen",    slug: "pick_pen"    }
     ];
     const methods = [
-        { label: "RGB — ±30°",          slug: "rgb_30"    },
-        { label: "RGB — ±180°",         slug: "rgb_180"   },
-        { label: "S²-Diffusion — ±30°", slug: "s2_30"     },
-        { label: "S²-Diffusion — ±180°",slug: "s2_180"    },
-        { label: "KIL (IM) — ±30°",     slug: "kil_im_30" },
-        { label: "KIL (IM) — ±180°",    slug: "kil_im_180"},
-        { label: "KIL (T) — ±30°",      slug: "kil_t_30"  },
-        { label: "KIL (T) — ±180°",     slug: "kil_t_180" }
+        { label: "RGB",          slug: "rgb"    },
+        { label: "S²-Diffusion", slug: "s2"     },
+        { label: "KIL (IM)",     slug: "kil_im" },
+        { label: "KIL (T)",      slug: "kil_t"  }
     ];
     const conditions = [
         { label: "In-distribution", slug: "in"  },
@@ -99,16 +96,8 @@
 
             const grid = methodDiv.querySelector('.video-grid');
             conditions.forEach(cond => {
-                const prefix = `rot_${task.slug}_${method.slug}_${cond.slug}`;
-                grid.insertAdjacentHTML('beforeend', `
-                    <div class="video-item">
-                        <p class="condition-label">${cond.label}</p>
-                        <video width="320" height="240" controls>
-                            <source src="videos/${prefix}.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                `);
+                const key = `rot_${task.slug}_${method.slug}_${cond.slug}`;
+                grid.insertAdjacentHTML('beforeend', driveVideoItem(key, cond.label));
             });
         });
 

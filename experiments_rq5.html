@@ -52,6 +52,7 @@
     </div>
 </footer>
 
+<script src="assets/js/video-urls.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
@@ -95,16 +96,8 @@
 
             const grid = methodDiv.querySelector('.video-grid');
             conditions.forEach(cond => {
-                const prefix = `rq5_${task.slug}_${method.slug}_${cond.slug}`;
-                grid.insertAdjacentHTML('beforeend', `
-                    <div class="video-item">
-                        <p class="condition-label">${cond.label}</p>
-                        <video width="320" height="240" controls>
-                            <source src="videos/${prefix}.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                `);
+                const key = `rq5_${task.slug}_${method.slug}_${cond.slug}`;
+                grid.insertAdjacentHTML('beforeend', driveVideoItem(key, cond.label));
             });
         });
 
