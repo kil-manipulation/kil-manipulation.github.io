@@ -140,11 +140,12 @@ a.button.mybutton:hover {
 
 /* ── Paper links (arXiv / preprint) ── */
 .paper-links {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 1em;
+	width: 100%;
+	text-align: center;
 	margin: 1em 0 2em;
+}
+.paper-links .button {
+	margin: 0 0.5em;
 }
 
 /* ── Authors & affiliations ── */
@@ -153,9 +154,9 @@ h3.authors {
 	margin-bottom: 0.4em;
 }
 .affiliations {
-	text-align: center;
-	font-size: 0.9em;
-	color: #555;
+	text-align: center !important;
+	font-size: 0.75em !important;
+	color: #555 !important;
 	margin-bottom: 1em;
 }
 
@@ -265,4 +266,13 @@ h3.authors {
 .rq-content.open {
 	max-height: 4000px;
 	opacity: 1;
+}
+.rq-heading.abstract-heading {
+	margin-top: 0.5em;
+	padding-top: 0;
+	border-top: none;
+	justify-content: center;
+}
+.rq-heading.abstract-heading .rq-toggle {
+	margin-left: 0.5em;
 }
